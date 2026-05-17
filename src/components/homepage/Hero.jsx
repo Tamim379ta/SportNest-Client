@@ -21,13 +21,13 @@ const Hero = () => {
 
         <SwiperSlide>
           <div className="flex flex-col gap-5 p-5 md:flex-row pb-15 container mx-auto justify-between items-center">
-            <div>
+            <div className="animate__animated animate__slideInLeft">
               <h1 className="text-5xl font-bold"> <span className="text-green-800">Where Champions </span> <br /> Reserve Their Arena.</h1>
               <p className="text-xl text-muted mt-3">Easy booking for premium sports facilities, tournaments, <br /> and training sessions.</p>
 
               <Link href={'/all-facilities'}>
                 <Button variant="outline" className={'rounded-xs group px-5 py-5 font-semibold bg-green-800 text-white  mt-3'}>
-                  See All Venue <FaArrowRightLong
+                  Explore Facilities <FaArrowRightLong
                     className="group-hover:translate-x-2 duration-300" />
                 </Button>
               </Link>
@@ -36,7 +36,7 @@ const Hero = () => {
             <div className="">
               <Image
                 className="w-140 h-120 rounded-xs object-cover"
-                src={'/assets/hero.jpg'}
+                src={'/assets/hero1.jfif'}
                 alt="Hero Image"
                 width={1000}
                 height={1000}
@@ -50,7 +50,7 @@ const Hero = () => {
 
           {/* Football  */}
           <div className="flex  flex-col gap-5 p-5 md:flex-row  pb-15 container mx-auto justify-between items-center">
-            <div>
+            <div >
               <h1 className="text-5xl font-bold"> <span className="text-green-800">Book Football Turf  </span> <br /> for Your Next Match</h1>
               <p className="text-xl text-muted mt-3">Gather your squad. Dominate the field.</p>
 
