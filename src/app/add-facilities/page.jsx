@@ -57,13 +57,13 @@ const AddFacilitiesPage = () => {
                 Select facility type
               </option>
 
-              <option value="football">Football</option>
-              <option value="cricket">Cricket</option>
-              <option value="tennis">Tennis</option>
-              <option value="badminton">Badminton</option>
-              <option value="basketball">Basketball</option>
-              <option value="volleyball">Volleyball</option>
-              <option value="other">Other</option>
+              <option value="Football">Football</option>
+              <option value="Cricket">Cricket</option>
+              <option value="Tennis">Tennis</option>
+              <option value="Badminton">Badminton</option>
+              <option value="Basketball">Basketball</option>
+              <option value="Volleyball">Volleyball</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
