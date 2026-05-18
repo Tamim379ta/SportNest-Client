@@ -1,6 +1,7 @@
 "use client"
 
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const AddFacilitiesPage = () => {
   const onSubmit = async (e) => {
@@ -17,7 +18,7 @@ const AddFacilitiesPage = () => {
     })
 
     const facility = await res.json()
-
+    toast.success('New Facility Added SuccessFully')
     redirect('/all-facilities')
   }
   return (

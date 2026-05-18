@@ -1,14 +1,13 @@
+import BookNowModal from "@/components/shared/BookNowModal";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 
 const FacilityDetailsPage = async ({ params }) => {
   const { id } = await params;
-  console.log(id)
 
   const res = await fetch(`http://localhost:5000/all-facilities/${id}`)
   const data = await res.json();
-  console.log(data)
   const { image, description, price_per_hour, location, facility_type, available_slots, booking_count, capacity, name, _id } = data
 
 
@@ -80,8 +79,7 @@ const FacilityDetailsPage = async ({ params }) => {
             </p>
           </div>
 
-
-          <Button className={'bg-green-800 text-white w-full rounded-xl'}>Book Now</Button>
+<BookNowModal data={data}/>
         </div>
       </div>
 
