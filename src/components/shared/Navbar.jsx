@@ -28,6 +28,7 @@ const Navbar = () => {
           <ul className="hidden md:flex items-center gap-8">
             <li><Link href={'/'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline"><BiHome/> Home</Link></li>
             <li><Link href={'/all-facilities'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline"> <TbCategory /> All Facilities</Link></li>
+            <li><Link href={'/add-facilities'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline"> <TbCategory /> Add Facilities</Link></li>
           </ul>
 
           {/* Right - Login Button (desktop) */}

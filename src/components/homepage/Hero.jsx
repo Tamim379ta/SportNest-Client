@@ -33,9 +33,9 @@ const Hero = () => {
               </Link>
             </div>
 
-            <div className="">
+            <div className="overflow-hidden">
               <Image
-                className="w-140 h-120 rounded-xs object-cover"
+                className="w-140 hover:scale-110 duration-300 h-120 rounded-xs object-cover"
                 src={'/assets/hero1.jfif'}
                 alt="Hero Image"
                 width={1000}
@@ -62,9 +62,9 @@ const Hero = () => {
               </Link>
             </div>
 
-            <div className="">
+            <div className="overflow-hidden">
               <Image
-                className="w-140 h-120 rounded-xs object-cover"
+                className="w-140 hover:scale-110 duration-300 h-120 rounded-xs object-cover"
                 src={'/assets/football.jpg'}
                 alt="Hero Image"
                 width={1000}
@@ -93,9 +93,9 @@ const Hero = () => {
               </Link>
             </div>
 
-            <div className="">
+            <div className=" overflow-hidden">
               <Image
-                className="w-140 h-120 rounded-xs object-cover"
+                className="w-140 hover:scale-110 duration-300 h-120 rounded-xs object-cover"
                 src={'/assets/cricket.jpg'}
                 alt="Hero Image"
                 width={1000}
