@@ -1,8 +1,28 @@
+"use client"
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 const EditModal = ({ data }) => {
-  const { image, description, price_per_hour,owner_email, location, facility_type, available_slots, booking_count, capacity, name, _id } = data
+  const { image, description, price_per_hour, owner_email, location, facility_type, available_slots, booking_count, capacity, name, _id } = data
 
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+    const res = await fetch(`http://localhost:5000/all-facilities/${_id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json'
+      },
+
+      body: JSON.stringify(data),
+       
+    })
+
+    toast.success('Update Successfully')
+    const undateData = await res.json()
+    window.location.reload()
+  }
   return (
     <div className="">
       <Modal>
@@ -18,7 +38,7 @@ const EditModal = ({ data }) => {
               </Modal.Header>
               <Modal.Body className="p-6">
                 <Surface variant="default">
-                  <form className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg  space-y-3 border my-5">
+                  <form onSubmit={onSubmit} className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg  space-y-3 border my-5">
 
                     <div className="grid md:grid-cols-2 gap-6">
 
@@ -130,7 +150,7 @@ const EditModal = ({ data }) => {
                           Owner Email
                         </label>
                         <input
-                        defaultValue={owner_email}
+                          defaultValue={owner_email}
                           required
                           type="email"
                           name="owner_email"
@@ -161,7 +181,7 @@ const EditModal = ({ data }) => {
                         Image URL
                       </label>
                       <input
-                      defaultValue={image}
+                        defaultValue={image}
                         required
                         type="url"
                         name="image"
@@ -175,7 +195,7 @@ const EditModal = ({ data }) => {
                         Description
                       </label>
                       <textarea
-                      defaultValue={description}
+                        defaultValue={description}
                         required
                         name="description"
                         rows="5"
@@ -184,23 +204,17 @@ const EditModal = ({ data }) => {
                       ></textarea>
                     </div>
 
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      className="w-full bg-green-500 hover:bg-green-600 transition-all duration-300 text-white font-semibold py-3 rounded-xl"
-                    >
-                      Add Facility
-                    </button>
+                    <Modal.Footer>
+                      <Button slot="close" variant="secondary">
+                        Cancel
+                      </Button>
+                      <Button type="submit" slot="close">Update</Button>
+                    </Modal.Footer>
 
                   </form>
                 </Surface>
               </Modal.Body>
-              <Modal.Footer>
-                <Button slot="close" variant="secondary">
-                  Cancel
-                </Button>
-                <Button slot="close">Send Message</Button>
-              </Modal.Footer>
+
             </Modal.Dialog>
           </Modal.Container>
         </Modal.Backdrop>
