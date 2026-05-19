@@ -1,13 +1,15 @@
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { BiEdit } from "react-icons/bi";
-const EditModal = () => {
+const EditModal = ({ data }) => {
+  const { image, description, price_per_hour,owner_email, location, facility_type, available_slots, booking_count, capacity, name, _id } = data
+
   return (
     <div className="">
       <Modal>
         <Button variant="secondary"> <BiEdit /> Edit</Button>
         <Modal.Backdrop>
           <Modal.Container placement="auto">
-            <Modal.Dialog className="sm:max-w-3xl mt-10">
+            <Modal.Dialog className="sm:max-w-3xl mt-20">
               <Modal.CloseTrigger />
               <Modal.Header>
 
@@ -16,7 +18,7 @@ const EditModal = () => {
               </Modal.Header>
               <Modal.Body className="p-6">
                 <Surface variant="default">
-                  <form  className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg  space-y-3 border my-5">
+                  <form className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg  space-y-3 border my-5">
 
                     <div className="grid md:grid-cols-2 gap-6">
 
@@ -26,6 +28,7 @@ const EditModal = () => {
                           Name
                         </label>
                         <input
+                          defaultValue={name}
                           required
                           type="text"
                           name="name"
@@ -41,10 +44,10 @@ const EditModal = () => {
                         </label>
 
                         <select
+                          defaultValue={facility_type}
                           required
                           name="facility_type"
                           className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-                          defaultValue=""
                         >
                           <option value="" disabled>
                             Select facility type
@@ -66,6 +69,7 @@ const EditModal = () => {
                           Location
                         </label>
                         <input
+                          defaultValue={location}
                           required
                           type="text"
                           name="location"
@@ -80,6 +84,7 @@ const EditModal = () => {
                           Price Per Hour
                         </label>
                         <input
+                          defaultValue={price_per_hour}
                           required
                           type="number"
                           name="price_per_hour"
@@ -94,6 +99,7 @@ const EditModal = () => {
                           Capacity
                         </label>
                         <input
+                          defaultValue={capacity}
                           required
                           type="number"
                           name="capacity"
@@ -108,6 +114,8 @@ const EditModal = () => {
                           Available Slots
                         </label>
                         <input
+
+                          defaultValue={available_slots}
                           required
                           type="text"
                           name="available_slots"
@@ -122,6 +130,7 @@ const EditModal = () => {
                           Owner Email
                         </label>
                         <input
+                        defaultValue={owner_email}
                           required
                           type="email"
                           name="owner_email"
@@ -140,7 +149,7 @@ const EditModal = () => {
                           type="number"
                           name="booking_count"
                           placeholder="0"
-                          defaultValue={0}
+                          defaultValue={booking_count}
                           className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                       </div>
@@ -152,6 +161,7 @@ const EditModal = () => {
                         Image URL
                       </label>
                       <input
+                      defaultValue={image}
                         required
                         type="url"
                         name="image"
@@ -165,6 +175,7 @@ const EditModal = () => {
                         Description
                       </label>
                       <textarea
+                      defaultValue={description}
                         required
                         name="description"
                         rows="5"

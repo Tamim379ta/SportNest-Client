@@ -1,4 +1,6 @@
 import BookNowModal from "@/components/shared/BookNowModal";
+import DeleteModal from "@/components/shared/DeleteModal";
+import EditModal from "@/components/shared/EditModal";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
@@ -27,10 +29,16 @@ const FacilityDetailsPage = async ({ params }) => {
         </div>
 
         <div className="flex-1 space-y-5">
+          <div className="flex justify-between">
+            <h1 className="text-4xl font-bold tracking-tight">
+              {name}
+            </h1>
 
-          <h1 className="text-4xl font-bold tracking-tight">
-            {name}
-          </h1>
+            <div className="flex gap-2">
+              <EditModal data={data} />
+              <DeleteModal data={data}/>
+            </div>
+          </div>
 
           <div className="flex flex-wrap items-center gap-4 text-gray-700">
 
@@ -79,7 +87,7 @@ const FacilityDetailsPage = async ({ params }) => {
             </p>
           </div>
 
-<BookNowModal data={data}/>
+          <BookNowModal data={data} />
         </div>
       </div>
 

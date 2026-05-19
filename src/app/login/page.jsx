@@ -104,7 +104,7 @@ const LoginPage = () => {
 
           </Form>
 
-          <p className="text-center my-2"> Or sign in with</p>
+          <p className="text-center my-2"> or </p>
 
           <div>
             <Button className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Sign in with Google</Button>

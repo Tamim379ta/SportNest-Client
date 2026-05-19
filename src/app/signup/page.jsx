@@ -140,7 +140,7 @@ const SignUpPage = () => {
 
           </Form>
 
-          <p className="text-center my-2"> Or signup with</p>
+          <p className="text-center my-2">or</p>
 
           <div>
             <Button className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Signup with Google</Button>
