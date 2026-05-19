@@ -1,14 +1,36 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import Image from 'next/image';
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
 
 const SignUpPage = () => {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget)
+    const user = Object.fromEntries(formData.entries())
+
+    const { data, error } = await authClient.signUp.email({
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      image: user.image
+  })
+     if (data) {
+      redirect('/')
+    }
+
   }
+
+   const signIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className='mt-25 mb-10 flex gap-10 container mx-auto p-2 md:p-5 lg-10 rounded-2xl  bg-[#f8fff6]'>
 
@@ -143,7 +165,7 @@ const SignUpPage = () => {
           <p className="text-center my-2">or</p>
 
           <div>
-            <Button className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Signup with Google</Button>
+            <Button onClick={signIn} className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Signup with Google</Button>
             <p className="text-center mt-2">
               Already have an account? <Link className="text-green-900 underline " href={'/login'}>Login</Link>
             </p>

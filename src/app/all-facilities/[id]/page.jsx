@@ -15,7 +15,14 @@ const FacilityDetailsPage = async ({ params }) => {
 
   return (
     <div className='mt-20 container mx-auto'>
-      <h1 className='text-4xl font-bold py-5'>Facility Details</h1>
+      <div className="flex flex-col md:flex-row items-center justify-between">
+        <h1 className='text-4xl font-bold py-5'>Facility Details</h1>
+        <div className="flex gap-2">
+          <EditModal data={data} />
+          <DeleteModal data={data} />
+        </div>
+      </div>
+
 
       <div className="p-5 my-5 flex flex-col md:flex-row items-start gap-10 shadow-2xl border rounded-2xl">
         <div className="flex-1">
@@ -29,16 +36,9 @@ const FacilityDetailsPage = async ({ params }) => {
         </div>
 
         <div className="flex-1 space-y-5">
-          <div className="flex justify-between">
-            <h1 className="text-4xl font-bold tracking-tight">
-              {name}
-            </h1>
-
-            <div className="flex gap-2">
-              <EditModal data={data} />
-              <DeleteModal data={data}/>
-            </div>
-          </div>
+          <h1 className="text-4xl font-bold tracking-tight">
+            {name}
+          </h1>
 
           <div className="flex flex-wrap items-center gap-4 text-gray-700">
 

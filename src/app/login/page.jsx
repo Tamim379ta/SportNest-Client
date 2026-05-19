@@ -1,14 +1,39 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import Image from 'next/image';
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 
 const LoginPage = () => {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget)
+    const user = Object.fromEntries(formData.entries())
+
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    })
+    if (data) {
+      toast.success('Login Successfull')
+      redirect('/')
+    } else {
+      toast.error('Login Faild Try Again')
+
+    }
+
   }
+
+  const signIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className='mt-25 mb-10 flex gap-10 container mx-auto p-2 md:p-10 rounded-2xl  bg-[#f8fff6]'>
 
@@ -36,7 +61,7 @@ const LoginPage = () => {
           </div>
 
           <Form className="flex flex-col gap-5" onSubmit={onSubmit}>
-          
+
             {/* Email */}
             <TextField
               isRequired
@@ -89,7 +114,7 @@ const LoginPage = () => {
                 placeholder="Enter your password"
               />
 
-              
+
 
               <FieldError className="text-red-500 text-sm" />
             </TextField>
@@ -107,7 +132,7 @@ const LoginPage = () => {
           <p className="text-center my-2"> or </p>
 
           <div>
-            <Button className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Sign in with Google</Button>
+            <Button onClick={signIn} className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Sign in with Google</Button>
             <p className="text-center mt-2">
               Don't have an account? <Link className="text-green-900 underline " href={'/signup'}>Sign Up</Link>
             </p>
