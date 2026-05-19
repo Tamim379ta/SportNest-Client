@@ -16,7 +16,7 @@ const EditModal = ({ data }) => {
       },
 
       body: JSON.stringify(data),
-       
+
     })
 
     toast.success('Update Successfully')
@@ -26,7 +26,10 @@ const EditModal = ({ data }) => {
   return (
     <div className="">
       <Modal>
-        <Button variant="secondary"> <BiEdit /> Edit</Button>
+       
+          <Button variant="outline" className={"flex items-center gap-1 px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium hover:bg-gray-100 transition-colors"}>
+            <BiEdit /> Edit
+          </Button>
         <Modal.Backdrop>
           <Modal.Container placement="auto">
             <Modal.Dialog className="sm:max-w-3xl mt-20">

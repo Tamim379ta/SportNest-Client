@@ -1,9 +1,12 @@
 "use client"
 
+import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 
 const AddFacilitiesPage = () => {
+  const {data:session} = authClient.useSession()
+  const user = session?.user
   const onSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
@@ -130,6 +133,7 @@ const AddFacilitiesPage = () => {
               Owner Email
             </label>
             <input
+            defaultValue={user?.email}
               required
               type="email"
               name="owner_email"

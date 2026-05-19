@@ -22,7 +22,7 @@ const DeleteModal = ({ data }) => {
   return (
     <div>
       <AlertDialog>
-        <Button className={'text-red-500 border border-red-500'} variant="outline"> <BiTrash /> Delete</Button>
+        <Button className={'text-red-500 border rounded-lg border-red-500'} variant="outline"> <BiTrash /> Delete</Button>
         <AlertDialog.Backdrop>
           <AlertDialog.Container>
             <AlertDialog.Dialog className="sm:max-w-100">

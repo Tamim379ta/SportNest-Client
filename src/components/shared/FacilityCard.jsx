@@ -30,9 +30,12 @@ const FacilityCard = ({ facility }) => {
           </div>
           <p className=' font-semibold bg-white/50 px-2  py-1 rounded-2xl w-29'>${price_per_hour} <span className='text-sm text-gray-700'>/per hour</span> </p>
           <Link href={`/all-facilities/${_id}`}>
-            <Button className={'w-full bg-white group'} variant='white'>
-              See Details  <FaArrowRightLong />
-            </Button>
+            <button className="= w-full mt-1  text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-white/20">
+              <span className="block border-2 border-white/50 rounded-[0.75em] px-5 py-2 bg-white text-black -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
+                <span className="flex justify-center items-center gap-1"> See Details  <FaArrowRightLong /></span>
+              </span>
+            </button>
+           
           </Link>
         </div>
       </div>

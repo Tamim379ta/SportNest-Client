@@ -1,17 +1,48 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 const BookNowModal = ({ data }) => {
-  const { price_per_hour, name } = data;
+  const { data: session } = authClient.useSession()
+
+  const user = session?.user
+  const { id, email } = user
+
+  const { price_per_hour, name,image } = data;
   const [hours, setHours] = useState(1);
 
   const totalPrice = price_per_hour * hours;
 
   const onSubmit = (e) => {
     e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+    const { bookingDate, timeSlot,hours,facilityName } = data;
+
+    const bookingData = {
+      facility_name: facilityName,
+      facility_id: id,
+      user_email: email,
+      booking_date: bookingDate,
+      time_slot: timeSlot,
+      hours: hours,
+      image: image,
+      total_price: totalPrice,
+      status: "pending",
+    }
+
+
+    const res = fetch(`http://localhost:5000/my-bookings`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(bookingData)
+    })
+
 
     toast.success('Booking Successfull')
     redirect('/all-facilities')
@@ -20,7 +51,13 @@ const BookNowModal = ({ data }) => {
     <div>
 
       <Modal>
-        <Button className={'bg-green-800 text-white w-full rounded-xl'}>Book Now</Button>
+        <Modal.Trigger asChild>
+          <button className="w-full rounded-[0.75em] bg-black border-none cursor-pointer text-[17px] font-bold">
+            <span className="block border-2 border-black rounded-[0.75em] px-5 py-2 bg-green-800 text-white -translate-y-[0.2em] transition-transform duration-100 ease-in hover:-translate-y-[0.33em] active:translate-y-0">
+              Book Now
+            </span>
+          </button>
+        </Modal.Trigger>
         <Modal.Backdrop>
           <Modal.Container placement="auto">
             <Modal.Dialog className="sm:max-w-md mt-10">
@@ -30,17 +67,17 @@ const BookNowModal = ({ data }) => {
                 <Surface variant="default">
                   <form onSubmit={onSubmit} className="flex flex-col gap-4">
 
-                    <TextField  defaultValue={name} className="w-full" name="facilityName">
+                    <TextField defaultValue={name} className="w-full" name="facilityName">
                       <Label>Facility Name</Label>
                       <Input required placeholder="Enter facility name" />
                     </TextField>
 
-                    <TextField  className="w-full" name="bookingDate">
+                    <TextField className="w-full" name="bookingDate">
                       <Label>Booking Date</Label>
                       <Input required type="date" />
                     </TextField>
 
-                    <TextField  className="w-full" name="timeSlot">
+                    <TextField className="w-full" name="timeSlot">
                       <Label>Time Slot</Label>
                       <Input required placeholder="e.g. 10:00 AM - 12:00 PM" />
                     </TextField>
@@ -67,7 +104,14 @@ const BookNowModal = ({ data }) => {
                     </div>
                     <Modal.Footer>
 
-                      <Button type="submit" className={'bg-green-800 text-white'} >Confirm Booking</Button>
+                      <button
+                        type="submit"
+                        className="rounded-[0.75em] bg-black border-none cursor-pointer text-[17px] font-bold"
+                      >
+                        <span className="block border-2 border-black rounded-[0.75em] px-5 py-2 bg-green-800 text-white -translate-y-[0.2em] transition-transform duration-100 ease-in hover:-translate-y-[0.33em] active:translate-y-0">
+                          Confirm Booking
+                        </span>
+                      </button>
                     </Modal.Footer>
                   </form>
                 </Surface>
@@ -78,7 +122,7 @@ const BookNowModal = ({ data }) => {
         </Modal.Backdrop>
       </Modal>
 
-    </div>
+    </div >
   );
 };
 

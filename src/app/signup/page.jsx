@@ -19,14 +19,14 @@ const SignUpPage = () => {
       password: user.password,
       name: user.name,
       image: user.image
-  })
-     if (data) {
+    })
+    if (data) {
       redirect('/')
     }
 
   }
 
-   const signIn = async () => {
+  const signIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
@@ -152,12 +152,11 @@ const SignUpPage = () => {
               <FieldError className="text-red-500 text-sm" />
             </TextField>
 
-            <Button
-              type="submit"
-              className="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-lg transition"
-            >
-              Create Account
-            </Button>
+            <button type="submit" className="group mt-3  text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-black">
+              <span className="block border-2 border-black rounded-[0.75em] px-5 py-2 bg-green-800 text-white -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
+                Create Account
+              </span>
+            </button>
 
 
           </Form>
@@ -165,7 +164,11 @@ const SignUpPage = () => {
           <p className="text-center my-2">or</p>
 
           <div>
-            <Button onClick={signIn} className={'w-full rounded-xl'} variant="outline"> <FcGoogle /> Signup with Google</Button>
+            <button onClick={signIn} className=" w-full text-center text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
+              <span className="block border-2 border-green-800 rounded-[0.75em] px-5 py-2 bg-white text-green-800 -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
+                <span className="flex gap-2 w-full justify-center items-center"><FcGoogle /> Sign in with Google</span>
+              </span>
+            </button>
             <p className="text-center mt-2">
               Already have an account? <Link className="text-green-900 underline " href={'/login'}>Login</Link>
             </p>

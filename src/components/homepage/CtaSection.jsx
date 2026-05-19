@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
 const CtaSection = () => {
   return (
@@ -28,9 +29,12 @@ const CtaSection = () => {
           </p>
 
           <Link href={'/all-facilities'}>
-            <button className="mt-5 px-6 py-2 bg-green-500 hover:bg-green-600 rounded-full font-medium transition">
-              Explore Venues
-            </button>
+            <button className="group mt-3  text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
+                  <span className="block border-2 border-green-800 rounded-[0.75em] px-5 py-2 bg-white text-green-800 -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
+                    <span className="flex items-center gap-1"> Explore Venues <FaArrowRightLong
+                      className="group-hover:translate-x-2 duration-300" /></span>
+                  </span>
+                </button>
           </Link>
 
         </div>
