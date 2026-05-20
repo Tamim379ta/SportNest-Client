@@ -62,7 +62,7 @@ const Navbar = () => {
                           <p>{user.email}</p>
                         </Label>
                       </Dropdown.Item>
-                      <Dropdown.Item id="copy-link" textValue="Copy link">
+                      <Dropdown.Item id="add-facilities" textValue="Add Facilities">
                         <Link href={'/add-facilities'} className="block w-full">
                           Add Facilities
                         </Link>
@@ -127,7 +127,7 @@ const Navbar = () => {
                             <p>{user.email}</p>
                           </Label>
                         </Dropdown.Item>
-                        <Dropdown.Item id="copy-link" textValue="Copy link">
+                        <Dropdown.Item id="add-facilities" textValue="Add Facilities">
                           <Link href={'/add-facilities'} className="block w-full">
                             Add Facilities
                           </Link>
