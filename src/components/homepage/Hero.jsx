@@ -38,7 +38,7 @@ const Hero = () => {
             <div className="overflow-hidden">
               <Image
                 className="w-140 hover:scale-110 duration-300 h-120 rounded-xs object-cover"
-                src={'/assets/hero1.jfif'}
+                src={'/assets/banner.jpg'}
                 alt="Hero Image"
                 width={1000}
                 height={1000}
