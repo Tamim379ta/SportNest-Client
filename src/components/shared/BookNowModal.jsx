@@ -1,10 +1,9 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import { Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { CiBookmarkPlus } from "react-icons/ci";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 
 const BookNowModal = ({ data }) => {
@@ -20,7 +19,7 @@ const BookNowModal = ({ data }) => {
   const totalPrice = price_per_hour * hours;
 
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
@@ -39,7 +38,7 @@ const BookNowModal = ({ data }) => {
     }
 
 
-    const res = fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -47,7 +46,7 @@ const BookNowModal = ({ data }) => {
       body: JSON.stringify(bookingData)
     })
 
-
+    const booking = await res.json()
     toast.success('Booking Successfull')
     redirect('/all-facilities')
   }
@@ -58,7 +57,7 @@ const BookNowModal = ({ data }) => {
         <Modal.Trigger >
           <button className="w-full rounded-[0.75em] bg-black border-none cursor-pointer text-[17px] font-bold">
             <span className="block border-2 border-black rounded-[0.75em] px-5 py-2 bg-green-800 text-white -translate-y-[0.2em] transition-transform duration-100 ease-in hover:-translate-y-[0.33em] active:translate-y-0">
-             <span className="flex items-center gap-2"> <MdOutlineBookmarkAdd /> Book Now</span>
+              <span className="flex items-center gap-2"> <MdOutlineBookmarkAdd /> Book Now</span>
             </span>
           </button>
         </Modal.Trigger>
