@@ -4,27 +4,31 @@ import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { CiBookmarkPlus } from "react-icons/ci";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
 
 const BookNowModal = ({ data }) => {
-  const { data: session } = authClient.useSession()
-
-  const user = session?.user
-  const { id, email } = user
-
-  const { price_per_hour, name,image } = data;
   const [hours, setHours] = useState(1);
+  const { data: session, isPending } = authClient.useSession()
+  if (isPending) {
+    return;
+  }
+  const user = session?.user
+  const { _id, email } = user
 
+  const { price_per_hour, name, image } = data;
   const totalPrice = price_per_hour * hours;
+
 
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
-    const { bookingDate, timeSlot,hours,facilityName } = data;
+    const { bookingDate, timeSlot, hours, facilityName } = data;
 
     const bookingData = {
       facility_name: facilityName,
-      facility_id: id,
+      facility_id: _id,
       user_email: email,
       booking_date: bookingDate,
       time_slot: timeSlot,
@@ -54,7 +58,7 @@ const BookNowModal = ({ data }) => {
         <Modal.Trigger >
           <button className="w-full rounded-[0.75em] bg-black border-none cursor-pointer text-[17px] font-bold">
             <span className="block border-2 border-black rounded-[0.75em] px-5 py-2 bg-green-800 text-white -translate-y-[0.2em] transition-transform duration-100 ease-in hover:-translate-y-[0.33em] active:translate-y-0">
-              Book Now
+             <span className="flex items-center gap-2"> <MdOutlineBookmarkAdd /> Book Now</span>
             </span>
           </button>
         </Modal.Trigger>

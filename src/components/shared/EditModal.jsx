@@ -1,21 +1,29 @@
 "use client"
+import { authClient } from "@/lib/auth-client";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 const EditModal = ({ data }) => {
+  const { data: session } = authClient.useSession()
+  const user = session?.user
+
   const { image, description, price_per_hour, owner_email, location, facility_type, available_slots, booking_count, capacity, name, _id } = data
 
   const onSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
+    const addData = {
+      ...data,
+      owner_email: user?.email
+    }
     const res = await fetch(`http://localhost:5000/all-facilities/${_id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
       },
 
-      body: JSON.stringify(data),
+      body: JSON.stringify(addData),
 
     })
 
@@ -26,10 +34,10 @@ const EditModal = ({ data }) => {
   return (
     <div className="">
       <Modal>
-       
-          <Button variant="outline" className={"flex items-center gap-1 px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium hover:bg-gray-100 transition-colors"}>
-            <BiEdit /> Edit
-          </Button>
+
+        <Button variant="outline" className={"flex items-center gap-1 px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium hover:bg-gray-100 transition-colors"}>
+          <BiEdit /> Edit
+        </Button>
         <Modal.Backdrop>
           <Modal.Container placement="auto">
             <Modal.Dialog className="sm:max-w-3xl mt-20">
@@ -148,7 +156,7 @@ const EditModal = ({ data }) => {
                       </div>
 
                       {/* Owner Email */}
-                      <div>
+                      {/* <div>
                         <label className="block mb-2 font-semibold text-gray-700">
                           Owner Email
                         </label>
@@ -160,7 +168,7 @@ const EditModal = ({ data }) => {
                           placeholder="owner@example.com"
                           className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
-                      </div>
+                      </div> */}
 
                       {/* Booking Count */}
                       <div>

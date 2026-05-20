@@ -1,6 +1,5 @@
 "use client";
 import { AlertDialog, Button } from "@heroui/react";
-import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 import { BiTrash } from "react-icons/bi";
 
@@ -16,7 +15,7 @@ const DeleteModal = ({ data }) => {
     })
     const data = await res.json()
     toast.error('Deleted Succeccfully')
-    redirect('/all-facilities')
+    window.location.reload()
   }
 
   return (

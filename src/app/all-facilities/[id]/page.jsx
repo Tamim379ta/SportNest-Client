@@ -1,11 +1,22 @@
 import BookNowModal from "@/components/shared/BookNowModal";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 
 const FacilityDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const token = await auth.api.getToken({
+    headers: await headers()
+  })
 
-  const res = await fetch(`http://localhost:5000/all-facilities/${id}`)
+  console.log(token)
+
+  const res = await fetch(`http://localhost:5000/all-facilities/${id}` , {
+    headers: {
+      authorization: `Bearer ${token.token}`
+    }
+  })
   const data = await res.json();
   const { image, description, price_per_hour, location, facility_type, available_slots, booking_count, capacity, name, _id } = data
 

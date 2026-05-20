@@ -1,14 +1,20 @@
 
 import ManageFacilites from "@/components/shared/ManageFacilites";
 import { auth } from "@/lib/auth";
-import { Button } from "@heroui/react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const ManageFacility = async () => {
+  const token = await auth.api.getToken({
+    headers: await headers()
+  })
 
-  const res = await fetch(`http://localhost:5000/manage-my-facilities`)
+  const res = await fetch(`http://localhost:5000/manage-my-facilities`, {
+    headers: {
+      authorization: `Bearer ${token.token}`
+    }
+  })
   const data = await res.json();
   const session = await auth.api.getSession({
     headers: await headers() // you need to pass the headers object.
@@ -31,7 +37,12 @@ const ManageFacility = async () => {
               <p className="text-lg">No facilities yet</p>
               <p className="text-sm">Start by adding your first facility 🚀</p>
               <Link href={'/add-facilities'}>
-                <Button className={'bg-green-800 text-white group'} variant="outline"> Add Facility<FaArrowRightLong className="group-hover:translate-x-2 duration-300" /> </Button>
+                <button className="group mt-3  text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
+                  <span className="block border-2 border-green-800 rounded-[0.75em] px-5 py-2 bg-white text-green-800 -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
+                    <span className="flex items-center gap-1"> Add Facility <FaArrowRightLong
+                      className="group-hover:translate-x-2 duration-300" /></span>
+                  </span>
+                </button>
               </Link>
             </div>
           )

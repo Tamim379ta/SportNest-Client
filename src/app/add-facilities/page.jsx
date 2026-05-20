@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 
 const AddFacilitiesPage = () => {
-  const {data:session} = authClient.useSession()
+  const { data: session } = authClient.useSession()
   const user = session?.user
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -16,10 +16,12 @@ const AddFacilitiesPage = () => {
       ...data,
       owner_email: user?.email
     }
+    const { data: tokenData } = await authClient.token()
 
     const res = await fetch('http://localhost:5000/all-facilities', {
       method: 'POST',
       headers: {
+        authorization: `Bearer ${tokenData.token}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify(addData)
