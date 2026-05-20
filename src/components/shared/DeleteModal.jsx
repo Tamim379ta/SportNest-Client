@@ -7,7 +7,7 @@ const DeleteModal = ({ data }) => {
   const { name, _id } = data
   const handleDlete = async (e) => {
     e.preventDefault()
-    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/all-facilities/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-facilities/${_id}`, {
       method: 'DELETE',
       headers: {
         'contenet-type': 'application/json'
