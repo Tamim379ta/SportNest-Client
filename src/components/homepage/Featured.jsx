@@ -1,7 +1,7 @@
 import FeaturedSlider from "../shared/FeaturedSlider";
 
 const Featured = async () => {
-  const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/featured-facilities`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured-facilities`);
   const data = await res.json();
 
   return (

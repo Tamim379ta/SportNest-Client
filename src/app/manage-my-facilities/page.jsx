@@ -10,7 +10,7 @@ const ManageFacility = async () => {
     headers: await headers()
   })
 
-  const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/manage-my-facilities`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/manage-my-facilities`, {
     headers: {
       authorization: `Bearer ${token.token}`
     }
