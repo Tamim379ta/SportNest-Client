@@ -16,7 +16,7 @@ const AllFacilitiesPage = () => {
   const fetchFacilities = async (text = searchText, category = selectedCategory) => {
 
     const res = await fetch(
-      `http://localhost:5000/all-facilities?search=${text}&category=${category}`
+      `${NEXT_PUBLIC_SERVER_URL}/all-facilities?search=${text}&category=${category}`
     );
 
     const data = await res.json();

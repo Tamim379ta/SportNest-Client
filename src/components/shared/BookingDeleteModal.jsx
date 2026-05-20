@@ -7,7 +7,7 @@ const BookingDeleteModal = ({ data }) => {
   const { facility_name, _id } = data
   const handleDlete = async (e) => {
     e.preventDefault()
-    const res = await fetch(`http://localhost:5000/my-bookings/${_id}`, {
+    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/my-bookings/${_id}`, {
       method: 'DELETE',
       headers: {
         'contenet-type': 'application/json'

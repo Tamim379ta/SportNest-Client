@@ -18,7 +18,7 @@ const AddFacilitiesPage = () => {
     }
     const { data: tokenData } = await authClient.token()
 
-    const res = await fetch('http://localhost:5000/all-facilities', {
+    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/all-facilities`, {
       method: 'POST',
       headers: {
         authorization: `Bearer ${tokenData.token}`,

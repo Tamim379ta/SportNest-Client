@@ -17,7 +17,7 @@ const EditModal = ({ data }) => {
       ...data,
       owner_email: user?.email
     }
-    const res = await fetch(`http://localhost:5000/all-facilities/${_id}`, {
+    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/all-facilities/${_id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'

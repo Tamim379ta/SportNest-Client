@@ -39,7 +39,7 @@ const BookNowModal = ({ data }) => {
     }
 
 
-    const res = fetch(`http://localhost:5000/my-bookings`, {
+    const res = fetch(`${NEXT_PUBLIC_SERVER_URL}/my-bookings`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
