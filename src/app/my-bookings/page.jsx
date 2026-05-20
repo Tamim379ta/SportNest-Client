@@ -21,14 +21,14 @@ const BookingsPage = async () => {
     <div className='mt-25 container mx-auto'>
 
       <h1 className='text-3xl md:text-4xl font-bold text-center'>My Bookings</h1>
-      <div className='flex flex-col gap-5 mt-10'>
+      <div className='flex flex-col gap-5 my-10'>
         {
           filterData.length ? (filterData.map(item => <BookingCard key={item._id} item={item} />)) :
             (<div className="text-center py-10 space-y-2 text-gray-500">
-              <p className="text-lg">No facilities yet</p>
-              <p className="text-sm">Start by adding your first facility 🚀</p>
-              <Link href={'/add-facilities'}>
-                <Button className={'bg-green-800 text-white group'} variant="outline"> Add Facility<FaArrowRightLong className="group-hover:translate-x-2 duration-300" /> </Button>
+              <p className="text-lg">No Bookings yet</p>
+              <p className="text-sm">let's Book Your First Venu.. 🚀</p>
+              <Link href={'/all-facilities'}>
+                <Button className={'bg-green-800 text-white group'} variant="outline">Booking <FaArrowRightLong className="group-hover:translate-x-2 duration-300" /> </Button>
               </Link>
             </div>)
           

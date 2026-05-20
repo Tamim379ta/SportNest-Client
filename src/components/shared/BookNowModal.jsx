@@ -51,7 +51,7 @@ const BookNowModal = ({ data }) => {
     <div>
 
       <Modal>
-        <Modal.Trigger asChild>
+        <Modal.Trigger >
           <button className="w-full rounded-[0.75em] bg-black border-none cursor-pointer text-[17px] font-bold">
             <span className="block border-2 border-black rounded-[0.75em] px-5 py-2 bg-green-800 text-white -translate-y-[0.2em] transition-transform duration-100 ease-in hover:-translate-y-[0.33em] active:translate-y-0">
               Book Now

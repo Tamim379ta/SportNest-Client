@@ -12,12 +12,17 @@ const AddFacilitiesPage = () => {
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
 
+    const addData = {
+      ...data,
+      owner_email: user?.email
+    }
+
     const res = await fetch('http://localhost:5000/all-facilities', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(addData)
     })
 
     const facility = await res.json()
@@ -128,7 +133,7 @@ const AddFacilitiesPage = () => {
           </div>
 
           {/* Owner Email */}
-          <div>
+          {/* <div>
             <label className="block mb-2 font-semibold text-gray-700">
               Owner Email
             </label>
@@ -140,7 +145,7 @@ const AddFacilitiesPage = () => {
               placeholder="owner@example.com"
               className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
-          </div>
+          </div> */}
 
           {/* Booking Count */}
           <div>

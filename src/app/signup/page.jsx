@@ -21,7 +21,7 @@ const SignUpPage = () => {
       image: user.image
     })
     if (data) {
-      redirect('/')
+      redirect('/login')
     }
 
   }
