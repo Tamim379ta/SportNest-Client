@@ -32,7 +32,7 @@ const FacilityCard = ({ facility }) => {
           <Link href={`/all-facilities/${_id}`}>
             <button className="= w-full mt-1  text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-white/20">
               <span className="block border-2 border-white/50 rounded-[0.75em] px-5 py-2 bg-white text-black -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
-                <span className="flex justify-center items-center gap-1"> See Details  <FaArrowRightLong /></span>
+                <span className="flex justify-center items-center gap-1"> Book Now  <FaArrowRightLong /></span>
               </span>
             </button>
            
