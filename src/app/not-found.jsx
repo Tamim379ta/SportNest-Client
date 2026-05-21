@@ -3,7 +3,7 @@ import { Home, SearchX } from "lucide-react";
 
 const NotFoundPage = () => {
   return (
-    <div className=" bg-[#f8fff6] flex items-center justify-center px-6 pt-25 pb-10 ">
+    <div className=" bg-[#f8fff6] flex items-center justify-center px-6 pt-5 pb-10 ">
       <div className="max-w-xl text-center">
 
         {/* Icon */}

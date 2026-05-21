@@ -23,11 +23,14 @@ const AllFacilitiesPage = () => {
     setFacilities(data);
   };
   useEffect(() => {
-    fetchFacilities();
-  }, []);
+    const loadFacilities = async () => {
+      await fetchFacilities();
+    };
 
+    loadFacilities();
+  }, []); 
   return (
-    <div className="pt-25">
+    <div className="pt-5">
 
       <h1 className="text-center text-3xl font-bold">
         All Facilities

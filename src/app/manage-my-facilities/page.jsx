@@ -22,7 +22,7 @@ const ManageFacility = async () => {
   const user = session?.user
   const filterData = data.filter(item => item.owner_email === user.email)
   return (
-    <div className='mt-25 container mx-auto'>
+    <div className='mt-5 container mx-auto'>
       <h1 className=' text-3xl md:text-4xl text-center font-bold p-5'>Manage My Facilities</h1>
 
 

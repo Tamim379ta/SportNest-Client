@@ -8,7 +8,7 @@ const ManageFacilites = ({ item }) => {
   const { image, description, price_per_hour, location, facility_type, available_slots, booking_count, capacity, name, _id } = item;
 
   return (
-    <div className="p-5">
+    <div className="px-5">
 
       <div className="shadow-xl border flex flex-col md:flex-row gap-10 p-5 rounded-xl">
         <div>

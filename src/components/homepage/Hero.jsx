@@ -10,7 +10,7 @@ import { Button } from "@heroui/react";
 import { FaArrowRightLong } from "react-icons/fa6";
 const Hero = () => {
   return (
-    <div className=" pt-20 pb-10 bg-gray-50 ">
+    <div className=" pt-5 pb-10 bg-gray-50 ">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={50}

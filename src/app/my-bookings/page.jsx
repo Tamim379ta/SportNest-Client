@@ -24,7 +24,7 @@ const BookingsPage = async () => {
   const filterData = data.filter(item => item.user_email  == user?.email)
  
   return (
-    <div className='mt-25 container mx-auto'>
+    <div className='mt-5 container mx-auto'>
 
       <h1 className='text-3xl md:text-4xl font-bold text-center'>My Bookings</h1>
       <div className='flex flex-col gap-5 my-10'>

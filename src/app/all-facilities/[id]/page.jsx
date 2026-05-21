@@ -21,7 +21,7 @@ const FacilityDetailsPage = async ({ params }) => {
 
 
   return (
-    <div className='mt-20 container mx-auto'>
+    <div className='mt-5 container mx-auto'>
       <h1 className='text-4xl font-bold py-5'>Facility Details</h1>
 
       <div className="p-5 my-5 flex flex-col md:flex-row items-start gap-10 shadow-2xl border rounded-2xl">

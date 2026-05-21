@@ -32,7 +32,7 @@ const AddFacilitiesPage = () => {
     redirect('/all-facilities')
   }
   return (
-    <div className="mt-20">
+    <div className="mt-5">
       <h1 className="text-center text-3xl font-bold pt-5">Add A New Facility </h1>
       <form onSubmit={onSubmit} className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg  space-y-3 border my-5">
 

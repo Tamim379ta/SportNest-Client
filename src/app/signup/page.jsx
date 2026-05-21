@@ -32,7 +32,7 @@ const SignUpPage = () => {
     });
   };
   return (
-    <div className='mt-25 mb-10 flex gap-10 container mx-auto p-2 md:p-5 lg-10 rounded-2xl  bg-[#f8fff6]'>
+    <div className='mt-5 mb-10 flex gap-10 container mx-auto p-2 md:p-5 lg-10 rounded-2xl  bg-[#f8fff6]'>
 
       <div className=" flex-1 hidden md:block">
         <Image

@@ -35,7 +35,7 @@ const LoginPage = () => {
     });
   };
   return (
-    <div className='mt-25 mb-10 flex gap-10 container mx-auto p-2 md:p-10 rounded-2xl  bg-[#f8fff6]'>
+    <div className='mt-5 mb-10 flex gap-10 container mx-auto p-2 md:p-10 rounded-2xl  bg-[#f8fff6]'>
 
       <div className="hidden md:block flex-1">
         <Image
