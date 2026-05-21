@@ -13,7 +13,7 @@ const BookNowModal = ({ data }) => {
     return;
   }
   const user = session?.user
-  const { _id: userId, email } = user;
+  const { _id, email } = user;
 
   const { price_per_hour, name, image } = data;
   const totalPrice = price_per_hour * hours;
@@ -27,7 +27,7 @@ const BookNowModal = ({ data }) => {
 
     const bookingData = {
       facility_name: facilityName,
-      user_id: userId,
+      facility_id: _id,
       user_email: email,
       booking_date: bookingDate,
       time_slot: timeSlot,

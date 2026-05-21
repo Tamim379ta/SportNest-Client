@@ -9,10 +9,10 @@ const BookingsPage = async () => {
   const token = await auth.api.getToken({
     headers: await headers()
   })
-  // const session = await auth.api.getSession({
-  //   headers: await headers() 
-  // })
-  // const user = session?.user
+  const session = await auth.api.getSession({
+    headers: await headers() 
+  })
+  const user = session?.user
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings`, {
     headers: {
@@ -21,7 +21,7 @@ const BookingsPage = async () => {
   })
   const data = await res.json()
 
-  // const filterData = data.filter(item => item.user_id  === user?.id)
+  const filterData = data.filter(item => item.user_email  == user?.email)
  
   return (
     <div className='mt-25 container mx-auto'>
@@ -29,7 +29,7 @@ const BookingsPage = async () => {
       <h1 className='text-3xl md:text-4xl font-bold text-center'>My Bookings</h1>
       <div className='flex flex-col gap-5 my-10'>
         {
-          data.length ? (data.map(item => <BookingCard key={item._id} item={item} />)) :
+          filterData.length ? (filterData.map(item => <BookingCard key={item._id} item={item} />)) :
             (<div className="text-center py-10 space-y-2 text-gray-500">
               <p className="text-lg">No Bookings yet</p>
               <p className="text-sm">let's Book Your First Venu.. 🚀</p>
