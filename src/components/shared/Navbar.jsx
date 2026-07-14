@@ -14,18 +14,16 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session, isPending } = authClient.useSession()
-  if (isPending) {
-    return;
-  }
   const user = session?.user
 
   const logout = async () => {
     await authClient.signOut()
   }
+
   return (
-    <div>
-      <nav className="bg-white shadow-md  w-full z-100">
-        <div className="max-w-7xl mx-auto py-2  flex items-center justify-between">
+    <div className="min-h-17 w-full">
+      <nav className="bg-white shadow-md w-full z-100 fixed top-0 left-0">
+        <div className="max-w-7xl mx-auto py-2 px-4 flex items-center justify-between">
 
           <div>
             <Image
@@ -33,68 +31,80 @@ const Navbar = () => {
               alt="SportNest"
               width={200}
               height={200}
+              priority // Priority attribute helps the logo load faster on refresh
             />
           </div>
+
           {/* Center - Nav Links (desktop) */}
           <ul className="hidden md:flex items-center gap-8">
-            <li><Link href={'/'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline"><BiHome /> Home</Link></li>
-            <li><Link href={'/all-facilities'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline"> <TbCategory /> All Facilities</Link></li>
+            <li>
+              <Link href={'/'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline">
+                <BiHome /> Home
+              </Link>
+            </li>
+            <li>
+              <Link href={'/all-facilities'} className="text-gray-600 hover:text-green-800 font-medium transition flex items-center gap-1 hover:underline">
+                <TbCategory /> All Facilities
+              </Link>
+            </li>
           </ul>
 
-          {/* Right - Login Button (desktop) */}
-          {
-            user ?
-              <div className="hidden md:inline-flex">
-                <Dropdown>
-                  <Button className="px-4 py-2 text-sm rounded-lg" aria-label="Menu" variant="secondary">
-                    <Avatar size="sm">
-                      <Avatar.Image referrerPolicy="no-referrer" alt={user?.name} src={user?.image} />
-                      <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
-                    </Avatar>
-                    <h1 className="text-black">{user?.name}</h1> <RiArrowDropDownLine className="text-black text-xl" />
-                  </Button>
+          {/* Right - Auth Section (desktop) */}
+          <div className="hidden md:inline-flex items-center min-w-30 justify-end">
+            {isPending ? (
+              // 1. Loading State Placeholder: A simple grey skeleton pill 
+              // that matches the shape of your buttons. Prevents layout shifts!
+              <div className="h-10 w-28 bg-gray-200 animate-pulse rounded-lg" />
+            ) : user ? (
+              <Dropdown>
+                <Button className="px-4 py-2 text-sm rounded-lg" aria-label="Menu" variant="secondary">
+                  <Avatar size="sm">
+                    <Avatar.Image referrerPolicy="no-referrer" alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback>{user?.name?.[0] || "U"}</Avatar.Fallback>
+                  </Avatar>
+                  <h1 className="text-black">{user?.name}</h1> 
+                  <RiArrowDropDownLine className="text-black text-xl" />
+                </Button>
 
-                  <Dropdown.Popover>
-                    <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-                      <Dropdown.Item id="new-file" textValue="New file">
-                        <Label>
-                          <p className="text-muted">Signed in with</p>
-                          <p>{user.email}</p>
-                        </Label>
-                      </Dropdown.Item>
-                      <Dropdown.Item id="add-facilities" textValue="Add Facilities">
-                        <Link href={'/add-facilities'} className="block w-full">
-                          Add Facilities
-                        </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item id="my-bookings" textValue="My Bookings">
-                        <Link href={'/my-bookings'} className="block w-full">
-                          My Bookings
-                        </Link>
-                      </Dropdown.Item>
-
-                      <Dropdown.Item id="edit-file" textValue="Edit file">
-                        <Link href={'/manage-my-facilities'} className="block w-full">
-                          Manage My Facilities
-                        </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={logout} id="delete-file" textValue="Delete file" variant="danger">
-                        <Label>Logout</Label>
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown.Popover>
-                </Dropdown>
-              </div>
-
-              : <Link className="hover:scale-105 duration-300" href={'/login'}>
-
-                <button className="md:inline-flex hidden text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
+                <Dropdown.Popover>
+                  <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
+                    <Dropdown.Item id="new-file" textValue="New file">
+                      <Label>
+                        <p className="text-muted">Signed in with</p>
+                        <p>{user.email}</p>
+                      </Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="add-facilities" textValue="Add Facilities">
+                      <Link href={'/add-facilities'} className="block w-full">
+                        Add Facilities
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="my-bookings" textValue="My Bookings">
+                      <Link href={'/my-bookings'} className="block w-full">
+                        My Bookings
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="edit-file" textValue="Edit file">
+                      <Link href={'/manage-my-facilities'} className="block w-full">
+                        Manage My Facilities
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={logout} id="delete-file" textValue="Delete file" variant="danger">
+                      <Label>Logout</Label>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown.Popover>
+              </Dropdown>
+            ) : (
+              <Link className="hover:scale-105 duration-300" href={'/login'}>
+                <button className="text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
                   <span className="block border-2 border-green-800 rounded-[0.75em] px-5 py-2 bg-white text-green-800 -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
                     <span className="flex items-center gap-1"><MdOutlineLogin /> Login</span>
                   </span>
                 </button>
               </Link>
-          }
+            )}
+          </div>
 
           {/* Hamburger (mobile) */}
           <button className="md:hidden text-2xl text-gray-800" onClick={() => setMenuOpen(!menuOpen)}>
@@ -107,58 +117,59 @@ const Navbar = () => {
           <div className="md:hidden flex flex-col px-6 pb-4 gap-3">
             <Link href={'/'} className="text-gray-700 font-medium hover:text-gray-900">Home</Link>
             <Link href={'/all-facilities'} className="text-gray-700 font-medium hover:text-gray-900">All Facilities</Link>
-            {
-              user ?
-                <>
-                  <Dropdown >
-                    <Button className="px-4 py-2 text-sm rounded-lg" aria-label="Menu" variant="secondary">
-                      <Avatar size="sm">
-                        <Avatar.Image referrerPolicy="no-referrer" alt={user?.name} src={user?.image} />
-                        <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
-                      </Avatar>
-                      <h1 className="text-black">{user?.name}</h1> <RiArrowDropDownLine className="text-black text-xl" />
-                    </Button>
+            
+            {isPending ? (
+              <div className="h-10 w-24 bg-gray-200 animate-pulse rounded-lg" />
+            ) : user ? (
+              <Dropdown>
+                <Button className="px-4 py-2 text-sm rounded-lg" aria-label="Menu" variant="secondary">
+                  <Avatar size="sm">
+                    <Avatar.Image referrerPolicy="no-referrer" alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback>{user?.name?.[0] || "U"}</Avatar.Fallback>
+                  </Avatar>
+                  <h1 className="text-black">{user?.name}</h1> 
+                  <RiArrowDropDownLine className="text-black text-xl" />
+                </Button>
 
-                    <Dropdown.Popover>
-                      <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-                        <Dropdown.Item id="new-file" textValue="New file">
-                          <Label>
-                            <p className="text-muted">Signed in with</p>
-                            <p>{user.email}</p>
-                          </Label>
-                        </Dropdown.Item>
-                        <Dropdown.Item id="add-facilities" textValue="Add Facilities">
-                          <Link href={'/add-facilities'} className="block w-full">
-                            Add Facilities
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item id="copy-link" textValue="Copy link">
-                          <Link href={'/my-bookings'} className="block w-full">
-                            My Bookings
-                          </Link>
-                        </Dropdown.Item>
-
-                        <Dropdown.Item id="edit-file" textValue="Edit file">
-                          <Link href={'/manage-my-facilities'} className="block w-full">
-                            Manage My Facilities
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={logout} id="delete-file" textValue="Delete file" variant="danger">
-                          <Label>Logout</Label>
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown.Popover>
-                  </Dropdown>
-                </>
-
-                : <Link className="hover:scale-105 duration-300" href={'/login'}>
-                  <button className="inline-flex  md:hidden text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
-                    <span className="block border-2 border-green-800 rounded-[0.75em] px-5 py-2 bg-white text-green-800 -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
-                      <span className="flex items-center gap-1"><MdOutlineLogin /> Login</span>
-                    </span>
-                  </button>
-                </Link>
-            }
+                <Dropdown.Popover>
+                  <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
+                    {/* ... (Mobile drop items match your original code) ... */}
+                    <Dropdown.Item id="new-file" textValue="New file">
+                      <Label>
+                        <p className="text-muted">Signed in with</p>
+                        <p>{user.email}</p>
+                      </Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="add-facilities" textValue="Add Facilities">
+                      <Link href={'/add-facilities'} className="block w-full">
+                        Add Facilities
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="copy-link" textValue="Copy link">
+                      <Link href={'/my-bookings'} className="block w-full">
+                        My Bookings
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="edit-file" textValue="Edit file">
+                      <Link href={'/manage-my-facilities'} className="block w-full">
+                        Manage My Facilities
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={logout} id="delete-file" textValue="Delete file" variant="danger">
+                      <Label>Logout</Label>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown.Popover>
+              </Dropdown>
+            ) : (
+              <Link className="hover:scale-105 duration-300" href={'/login'}>
+                <button className="inline-flex text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-green-800">
+                  <span className="block border-2 border-green-800 rounded-[0.75em] px-5 py-2 bg-white text-green-800 -translate-y-1 transition-transform duration-100 ease-in hover:translate-y-[-0.33em] active:translate-y-0">
+                    <span className="flex items-center gap-1"><MdOutlineLogin /> Login</span>
+                  </span>
+                </button>
+              </Link>
+            )}
           </div>
         )}
       </nav>
@@ -167,4 +178,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
